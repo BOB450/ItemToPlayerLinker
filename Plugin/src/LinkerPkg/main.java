@@ -17,7 +17,7 @@ public class main extends JavaPlugin implements Listener {
         getLogger().info("LINKER PLUGIN HAS BEEN ENABLED! by BOB450");
 
     }
-
+        //Make a loop that iterates through all player on server and run code below to check for dragon egg.
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("lol")) {
             Player p = (Player) sender;
