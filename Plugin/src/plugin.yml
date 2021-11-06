@@ -1,0 +1,5 @@
+main: LinkerPkg.main
+name: ItemLinker
+version: '0.1'
+description: A Plugin that links a item to a player
+author: BOB450
