@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ItemLinker">
+    <output-path>$PROJECT_DIR$/out/artifacts/ItemLinker</output-path>
+    <root id="archive" name="ItemLinker.jar">
+      <element id="module-output" name="ItemLinker" />
+    </root>
+  </artifact>
+</component>
