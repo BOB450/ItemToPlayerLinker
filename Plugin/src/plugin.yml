@@ -3,3 +3,16 @@ name: ItemLinker
 version: '0.1'
 description: A Plugin that links a item to a player
 author: BOB450
+commands:
+  lol:
+    description: test for item in inventory
+    usage: /lol
+    permission: Main.an1
+
+permissions:
+  main.an1:
+    description: Allows anyone to use
+    default: true
+  main.op1:
+    description: only operators can use
+    default: op
