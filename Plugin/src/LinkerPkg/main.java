@@ -28,12 +28,13 @@ public class main extends JavaPlugin implements Listener {
 
 
     private static void createWand(Player PL) {
-        ItemStack item = new ItemStack(Material.DRAGON_EGG, 1);
+        ItemStack item = new ItemStack(Material., 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("");
+        meta.setDisplayName(PL.getDisplayName());
         List<String> lore = new ArrayList<>();
-        lore.add("§7This is your Egg keep it SAFE!");
+        lore.add("§7This is your Egg, keep it SAFE!");
         meta.setLore(lore);
+
        // meta.addEnchant(Enchantment.LUCK, 1, false);
        // meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
@@ -42,8 +43,16 @@ public class main extends JavaPlugin implements Listener {
 
     public void doBreakStuff (Block block)
     {
+      //  Bukkit.broadcastMessage("The blocks type is" + block);
+        Bukkit.broadcastMessage( block.getBlockData().getAsString());
+        for(Player p : Bukkit.getOnlinePlayers())
+        {
+            if(p.getDisplayName() == block.getBlockData().getAsString())
+            {
+                Bukkit.broadcastMessage(p.getDisplayName() + "jsdfklsdfd");
+            }
+        }
 
-        Bukkit.broadcastMessage("The blocks type is" + block);
     }
 
 
@@ -54,20 +63,6 @@ public class main extends JavaPlugin implements Listener {
         getLogger().info("LINKER PLUGIN HAS BEEN ENABLED! by BOB450");
 
     }
-        //Make a loop that iterates through all player on server and run code below to check for dragon egg.
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("lol")) {
-            Player p = (Player) sender;
-            for (ItemStack is : p.getInventory()){
-                if (is.getType() == Material.DIRT){
-                    p.sendMessage("You have dirt");
-
-                }
-            }
-
-        }
-        return true;
-    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
@@ -75,16 +70,10 @@ public class main extends JavaPlugin implements Listener {
         Player plr = event.getPlayer();
         createWand(plr);
 
-        event.setJoinMessage(ChatColor.AQUA + "Welcome blank server " + plr.getDisplayName() + " use the /helpsmp command to get more info " );
+      //  event.setJoinMessage(ChatColor.AQUA + "Welcome blank server " + plr.getDisplayName() + " use the /helpsmp command to get more info " );
         if(plr.hasPlayedBefore() == true) {
-            ItemStack i  = new ItemStack(Material.DRAGON_EGG);
-           i.getItemMeta().setDisplayName("Costom egg");
             plr.getInventory().addItem(wand);
-            for (ItemStack is : plr.getInventory()){
-                if (is.getType() == Material.DRAGON_EGG){
-                    plr.sendMessage("You have a dragon egg");
-                }
-            }
+
         }
 
         //Bukkit.broadcastMessage(plr + "Has joined the serve ");
