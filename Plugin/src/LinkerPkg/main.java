@@ -1,5 +1,8 @@
 package LinkerPkg;
 
+import de.tr7zw.nbtapi.NBTItem;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -7,7 +10,9 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,11 +29,12 @@ import java.util.List;
 public class main extends JavaPlugin implements Listener {
 
 
-    public static ItemStack wand;
+    public static NBTItem wand;
+    public static ItemStack wandS;
 
 
     private static void createWand(Player PL) {
-        ItemStack item = new ItemStack(Material., 1);
+        ItemStack item = new ItemStack(Material.OAK_WOOD, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(PL.getDisplayName());
         List<String> lore = new ArrayList<>();
@@ -38,19 +44,25 @@ public class main extends JavaPlugin implements Listener {
        // meta.addEnchant(Enchantment.LUCK, 1, false);
        // meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
-        wand = item;
+
+
+       // NBTItem nbti = new NBTItem(wand);
+        wand.setString("Stringtest", "Teststring");
+        //nbti.getString("Stringtest");
+        wand.getItem();
+
+        Bukkit.broadcastMessage(wand.getString("Stringtest"));
+        wand = wandS;
+
     }
 
     public void doBreakStuff (Block block)
     {
       //  Bukkit.broadcastMessage("The blocks type is" + block);
-        Bukkit.broadcastMessage( block.getBlockData().getAsString());
+       // Bukkit.broadcastMessage( block.getBlockData().getAsString());
         for(Player p : Bukkit.getOnlinePlayers())
         {
-            if(p.getDisplayName() == block.getBlockData().getAsString())
-            {
-                Bukkit.broadcastMessage(p.getDisplayName() + "jsdfklsdfd");
-            }
+
         }
 
     }
@@ -72,7 +84,7 @@ public class main extends JavaPlugin implements Listener {
 
       //  event.setJoinMessage(ChatColor.AQUA + "Welcome blank server " + plr.getDisplayName() + " use the /helpsmp command to get more info " );
         if(plr.hasPlayedBefore() == true) {
-            plr.getInventory().addItem(wand);
+            plr.getInventory().addItem(wandS);
 
         }
 
