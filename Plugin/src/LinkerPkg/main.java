@@ -1,8 +1,7 @@
 package LinkerPkg;
 
-import de.tr7zw.nbtapi.NBTItem;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+
+import net.minecraft.nbt.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -29,30 +28,34 @@ import java.util.List;
 public class main extends JavaPlugin implements Listener {
 
 
-    public static NBTItem wand;
-    public static ItemStack wandS;
+    public static ItemStack wand;
 
 
-    private static void createWand(Player PL) {
+    public static void createWand(Player PL) {
         ItemStack item = new ItemStack(Material.OAK_WOOD, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(PL.getDisplayName());
+        meta.setLocalizedName(PL.getName());
         List<String> lore = new ArrayList<>();
-        lore.add("§7This is your Egg, keep it SAFE!");
+        lore.add(PL.getName());
         meta.setLore(lore);
+        meta.setLocalizedName(PL.getName());
 
        // meta.addEnchant(Enchantment.LUCK, 1, false);
        // meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+        wand = item;
+/*
+        net.minecraft.world.item.ItemStack nmsApple = CraftItemStack.asNMSCopy(wand);
+        NBTTagCompound tag = nmsApple.getOrCreateTag();
+        NBTTagList Modi = new NBTTagList();
+        NBTTagCompound UUId = new NBTTagCompound();
+        UUId.setString("id", PL.getName());
+        Modi.add(UUId);
+        tag.set("NBTT",Modi);
+        nmsApple.setTag(tag);
+        */
 
-
-       // NBTItem nbti = new NBTItem(wand);
-        wand.setString("Stringtest", "Teststring");
-        //nbti.getString("Stringtest");
-        wand.getItem();
-
-        Bukkit.broadcastMessage(wand.getString("Stringtest"));
-        wand = wandS;
 
     }
 
@@ -60,9 +63,16 @@ public class main extends JavaPlugin implements Listener {
     {
       //  Bukkit.broadcastMessage("The blocks type is" + block);
        // Bukkit.broadcastMessage( block.getBlockData().getAsString());
+        Block b = event.getBlock(block);
+        ItemMeta meta = b.getItemMeta();
+        ItemStack is = new ItemStack(b.getType(), 1);
+        is.setItemMeta(meta);
         for(Player p : Bukkit.getOnlinePlayers())
         {
+            if(p.getName() == block.getMetadata(LocalizedName))
+            {
 
+            }
         }
 
     }
@@ -84,7 +94,7 @@ public class main extends JavaPlugin implements Listener {
 
       //  event.setJoinMessage(ChatColor.AQUA + "Welcome blank server " + plr.getDisplayName() + " use the /helpsmp command to get more info " );
         if(plr.hasPlayedBefore() == true) {
-            plr.getInventory().addItem(wandS);
+            plr.getInventory().addItem(wand);
 
         }
 
