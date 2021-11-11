@@ -67,18 +67,26 @@ public class main extends JavaPlugin implements Listener {
         Location qloc = blockz.getLocation();
         for (int i = 0; i < BlockLoc.size(); i++)
         {
-            if(qloc.equals(BlockLoc.get(i)))
+            if(qloc.equals(BlockLoc.get(i)) && blockz.getType() == Material.OAK_WOOD)
             {
                 Bukkit.broadcastMessage("YAY");
+                String plrid = Players.get(i);
+                for(Player p : Bukkit.getOnlinePlayers()){
+                   if(p.getName() == plrid)
+                   {
+                       p.setGameMode(GameMode.SPECTATOR);
+                   }
+                }
             }
         }
     }
     public void placeStuff (Block block, Player pl)
     {
-
-       Location  Loc = block.getLocation();
-       BlockLoc.add(Loc);
-       Players.add(pl.getName());
+        if(block.getType() == Material.OAK_WOOD) {
+            Location Loc = block.getLocation();
+            BlockLoc.add(Loc);
+            Players.add(pl.getName());
+        }
 
 
     }
