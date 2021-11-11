@@ -2,10 +2,7 @@ package LinkerPkg;
 
 
 import net.minecraft.nbt.*;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -27,6 +25,9 @@ import java.util.List;
 
 public class main extends JavaPlugin implements Listener {
 
+    public ArrayList<Location> BlockLoc = new ArrayList<Location>();
+    public ArrayList<String> Players = new ArrayList<String>();
+
 
     public static ItemStack wand;
 
@@ -34,7 +35,7 @@ public class main extends JavaPlugin implements Listener {
     public static void createWand(Player PL) {
         ItemStack item = new ItemStack(Material.OAK_WOOD, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(PL.getDisplayName());
+        meta.setDisplayName(PL.getDisplayName() + "Egg");
         meta.setLocalizedName(PL.getName());
         List<String> lore = new ArrayList<>();
         lore.add(PL.getName());
@@ -59,21 +60,26 @@ public class main extends JavaPlugin implements Listener {
 
     }
 
-    public void doBreakStuff (Block block)
+    public void doBreakStuff (Block blockz)
     {
       //  Bukkit.broadcastMessage("The blocks type is" + block);
        // Bukkit.broadcastMessage( block.getBlockData().getAsString());
-        Block b = event.getBlock(block);
-        ItemMeta meta = b.getItemMeta();
-        ItemStack is = new ItemStack(b.getType(), 1);
-        is.setItemMeta(meta);
-        for(Player p : Bukkit.getOnlinePlayers())
+        Location qloc = blockz.getLocation();
+        for (int i = 0; i < BlockLoc.size(); i++)
         {
-            if(p.getName() == block.getMetadata(LocalizedName))
+            if(qloc.equals(BlockLoc.get(i)))
             {
-
+                Bukkit.broadcastMessage("YAY");
             }
         }
+    }
+    public void placeStuff (Block block, Player pl)
+    {
+
+       Location  Loc = block.getLocation();
+       BlockLoc.add(Loc);
+       Players.add(pl.getName());
+
 
     }
 
@@ -108,5 +114,11 @@ public class main extends JavaPlugin implements Listener {
         //Your Code Here
     }
 
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event2)
+    {
+        placeStuff(event2.getBlock() , event2.getPlayer());
+        //Your Code Here
+    }
 
 }
