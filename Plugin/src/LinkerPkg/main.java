@@ -28,6 +28,7 @@ public class main extends JavaPlugin implements Listener {
 
     public ArrayList<Location> BlockLoc = new ArrayList<Location>();
     public ArrayList<String> Players = new ArrayList<String>();
+    public ArrayList<String> OffSpec = new ArrayList<String>();
 
 
     public static ItemStack wand;
@@ -79,7 +80,19 @@ public class main extends JavaPlugin implements Listener {
                    {
                        p.setGameMode(GameMode.SPECTATOR);
                        blockz.breakNaturally();
+                       Players.remove(i);
+                       BlockLoc.remove(i);
+                       return;
                    }
+                }
+                for(OfflinePlayer p2 : Bukkit.getOfflinePlayers()){
+                    if(p2.getName() == plrid)
+                    {
+                        OffSpec.add(p2.getName());
+                        blockz.breakNaturally();
+                        Players.remove(i);
+                        BlockLoc.remove(i);
+                    }
                 }
             }
         }
@@ -108,6 +121,12 @@ public class main extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event)
     {
         Player plr = event.getPlayer();
+        for (int i2 = 0; i2 < OffSpec.size(); i2++) {
+            if (plr.getName().equals(OffSpec.get(i2))) {
+                plr.setGameMode(GameMode.SPECTATOR);
+                OffSpec.remove(i2);
+            }
+        }
         createWand(plr);
 
       //  event.setJoinMessage(ChatColor.AQUA + "Welcome blank server " + plr.getDisplayName() + " use the /helpsmp command to get more info " );
