@@ -119,6 +119,7 @@ public class main extends JavaPlugin implements Listener {
         //Bukkit.broadcastMessage(plr + "Has joined the serve ");
 
     }
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event)
     {
@@ -129,6 +130,7 @@ public class main extends JavaPlugin implements Listener {
     @EventHandler
     public  void onBlockExplode(BlockExplodeEvent event23)
     {
+        Bukkit.broadcastMessage("expllload");
         doBreakStuff(event23.getBlock());
     }
 
