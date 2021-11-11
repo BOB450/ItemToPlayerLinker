@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -26,10 +27,10 @@ import java.util.List;
 
 public class main extends JavaPlugin implements Listener {
 
-    public ArrayList<Location> BlockLoc = new ArrayList<Location>();
-    public ArrayList<String> Players = new ArrayList<String>();
-    public ArrayList<String> OffSpec = new ArrayList<String>();
-
+    public ArrayList<Location> BlockLoc = new ArrayList<Location>();//list of egg locations
+    public ArrayList<String> Players = new ArrayList<String>();//list of players that have a egg placed in the world
+    public ArrayList<String> OffSpec = new ArrayList<String>();//player is added to list if egg is broken while offline
+    public ArrayList<String> DieList = new ArrayList<String>();//added if egg is broken
 
     public static ItemStack wand;
 
@@ -78,7 +79,8 @@ public class main extends JavaPlugin implements Listener {
                 for(Player p : Bukkit.getOnlinePlayers()){
                    if(p.getName() == plrid)
                    {
-                       p.setGameMode(GameMode.SPECTATOR);
+                     //  p.setGameMode(GameMode.SPECTATOR);
+                       DieList.add(p.getName());
                        blockz.breakNaturally();
                        Players.remove(i);
                        BlockLoc.remove(i);
@@ -123,7 +125,8 @@ public class main extends JavaPlugin implements Listener {
         Player plr = event.getPlayer();
         for (int i2 = 0; i2 < OffSpec.size(); i2++) {
             if (plr.getName().equals(OffSpec.get(i2))) {
-                plr.setGameMode(GameMode.SPECTATOR);
+               // plr.setGameMode(GameMode.SPECTATOR);
+                DieList.add(plr.getName());
                 OffSpec.remove(i2);
             }
         }
@@ -159,6 +162,16 @@ public class main extends JavaPlugin implements Listener {
     {
         placeStuff(event2.getBlock() , event2.getPlayer());
         //Your Code Here
+    }
+
+    @EventHandler
+    public void onplayerDeath(PlayerDeathEvent event){
+        Player player9 = event.getEntity();
+        for (int i3 = 0; i3 < DieList.size(); i3++)
+        if(player9.getName().equals(DieList.get(i3))){
+            player9.setGameMode(GameMode.SPECTATOR);
+            Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"is out of the game");
+        }
     }
 
 }
