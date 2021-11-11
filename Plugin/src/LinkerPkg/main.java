@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemFlag;
@@ -124,6 +125,13 @@ public class main extends JavaPlugin implements Listener {
         doBreakStuff(event.getBlock());
         //Your Code Here
     }
+
+    @EventHandler
+    public  void onBlockExplode(BlockExplodeEvent event23)
+    {
+        doBreakStuff(event23.getBlock());
+    }
+
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event2)
