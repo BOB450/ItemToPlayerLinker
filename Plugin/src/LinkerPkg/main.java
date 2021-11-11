@@ -69,12 +69,15 @@ public class main extends JavaPlugin implements Listener {
         {
             if(qloc.equals(BlockLoc.get(i)) && blockz.getType() == Material.OAK_WOOD)
             {
-                Bukkit.broadcastMessage("YAY");
+
+
                 String plrid = Players.get(i);
+                Bukkit.broadcastMessage("Player " + Players.get(i) + " lost there egg");
                 for(Player p : Bukkit.getOnlinePlayers()){
                    if(p.getName() == plrid)
                    {
                        p.setGameMode(GameMode.SPECTATOR);
+                       blockz.breakNaturally();
                    }
                 }
             }
