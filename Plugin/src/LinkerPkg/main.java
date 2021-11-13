@@ -172,7 +172,16 @@ public class main extends JavaPlugin implements Listener {
             player9.setGameMode(GameMode.SPECTATOR);
             Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"is out of the game");
         }
-        
+        for (ItemStack i : player9.getInventory().getContents()) {
+            if (i != null) {
+                if (i.equals(Material.OAK_WOOD)) {
+                    Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"Has lost there egg");
+                    Bukkit.broadcastMessage(ChatColor.AQUA + "Player" + player9.getDisplayName() + "is out of the game");
+                    player9.setGameMode(GameMode.SPECTATOR);
+                }
+            }
+        }
+
     }
 
 }
