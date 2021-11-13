@@ -15,9 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockExplodeEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -156,10 +154,21 @@ public class main extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public  void onBlockExplode(BlockExplodeEvent event23)
+    public  void onBlockExplode(BlockExplodeEvent event)
     {
-        Bukkit.broadcastMessage("expllload");
-        doBreakStuff(event23.getBlock());
+        //Bukkit.broadcastMessage("expllload");
+        doBreakStuff(event.getBlock());
+    }
+    @EventHandler
+    public void onBLockBurn(BlockBurnEvent event)
+    {
+        doBreakStuff(event.getBlock());
+    }
+
+    @EventHandler
+    public void onBLockFade(BlockFadeEvent event)
+    {
+        doBreakStuff(event.getBlock());
     }
 
 
