@@ -172,6 +172,7 @@ public class main extends JavaPlugin implements Listener {
             player9.setGameMode(GameMode.SPECTATOR);
             Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"is out of the game");
         }
+        
     }
 
 }
