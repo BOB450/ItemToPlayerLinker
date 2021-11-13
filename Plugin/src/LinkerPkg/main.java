@@ -177,7 +177,8 @@ public class main extends JavaPlugin implements Listener {
                 if (i.equals(Material.OAK_WOOD)) {
                     Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"Has lost there egg");
                     Bukkit.broadcastMessage(ChatColor.AQUA + "Player" + player9.getDisplayName() + "is out of the game");
-                    player9.setGameMode(GameMode.SPECTATOR);
+                   // player9.setGameMode(GameMode.SPECTATOR);
+                    DieList.add(player9.getName());
                 }
             }
         }
