@@ -4,6 +4,8 @@ package LinkerPkg;
 import net.minecraft.nbt.*;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.block.DoubleChest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
@@ -11,13 +13,16 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -189,9 +194,25 @@ public class main extends JavaPlugin implements Listener {
     {
         Player player = e.getPlayer();
         if(e.getItemDrop().equals(Material.OAK_WOOD))
-            player.sendMessage("You cant do this bro :)");
+            player.sendMessage("Place it down dont drop");
             e.setCancelled(true);
 
+    }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onInventoryClick(InventoryClickEvent event) {
+
+        Player p = (Player) event.getWhoClicked();
+        Inventory clicked = event.getClickedInventory();
+        if ( event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
+
+            if (clicked == event.getWhoClicked().getInventory()) {
+
+                ItemStack clickedOn = event.getCurrentItem();
+                if (clickedOn != null && event.getCurrentItem().getType().equals(Material.OAK_WOOD)) {
+                    event.setCancelled( true );
+                }
+            }
+        }
     }
 
 }
