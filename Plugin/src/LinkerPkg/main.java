@@ -16,6 +16,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -180,6 +181,16 @@ public class main extends JavaPlugin implements Listener {
             // player9.setGameMode(GameMode.SPECTATOR);
             DieList.add(player9.getName());
         }
+
+    }
+
+    @EventHandler
+    public void onItemDrop(PlayerDropItemEvent e)
+    {
+        Player player = e.getPlayer();
+        if(e.getItemDrop().equals(Material.OAK_WOOD))
+            player.sendMessage("You cant do this bro :)");
+            e.setCancelled(true);
 
     }
 
