@@ -149,6 +149,8 @@ public class main extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event)
     {
+        event.setDropItems(false);
+
         doBreakStuff(event.getBlock());
         //Your Code Here
     }
@@ -156,12 +158,17 @@ public class main extends JavaPlugin implements Listener {
     @EventHandler
     public  void onBlockExplode(BlockExplodeEvent event)
     {
+
+            Bukkit.broadcastMessage(String.valueOf(event.blockList()));
+        
+
         //Bukkit.broadcastMessage("expllload");
         doBreakStuff(event.getBlock());
     }
     @EventHandler
     public void onBLockBurn(BlockBurnEvent event)
     {
+
         doBreakStuff(event.getBlock());
     }
 
