@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
+import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -212,6 +213,25 @@ public class main extends JavaPlugin implements Listener {
         if(e.getItemDrop().equals(Material.DRAGON_EGG))
             player.sendMessage("Place it down dont drop");
             e.setCancelled(true);
+
+    }
+
+    @EventHandler
+    public void onworlditemdrop(EntityDropItemEvent e)
+    {
+        for (int i = 0; i < BlockLoc.size(); i++) {
+            if (e.getItemDrop().getLocation().equals(BlockLoc.get(i))) {
+                DieList.add(Players.get(i));
+                BlockLoc.remove(i);
+                Players.remove(i);
+
+                //do stuff
+            }
+        }
+        //Bukkit.broadcastMessage("BLock drop" + e.getItemDrop().getName());
+        if(e.getItemDrop().getName().equals("Dragon Egg")) {
+            e.setCancelled(true);
+        }
 
     }
     @EventHandler(priority = EventPriority.HIGHEST)
