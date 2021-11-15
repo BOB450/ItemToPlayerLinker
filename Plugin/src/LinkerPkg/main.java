@@ -215,7 +215,7 @@ public class main extends JavaPlugin implements Listener {
             e.setCancelled(true);
 
     }
-
+/*
     @EventHandler
     public void onworlditemdrop(EntityDropItemEvent e2)
     {
@@ -234,6 +234,8 @@ public class main extends JavaPlugin implements Listener {
         }
 
     }
+    */
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryClick(InventoryClickEvent event) {
 
@@ -248,6 +250,14 @@ public class main extends JavaPlugin implements Listener {
                     event.setCancelled( true );
                 }
             }
+        }
+    }
+
+
+    @EventHandler
+    public void dragonEggTpEvent(BlockFromToEvent event){
+        if(event.getBlock().getType().equals(Material.DRAGON_EGG)){
+            event.setCancelled(true);
         }
     }
 
