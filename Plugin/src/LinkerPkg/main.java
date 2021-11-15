@@ -40,7 +40,7 @@ public class main extends JavaPlugin implements Listener {
 
 
     public static void createWand(Player PL) {
-        ItemStack item = new ItemStack(Material.OAK_WOOD, 1);
+        ItemStack item = new ItemStack(Material.DRAGON_EGG, 1);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(PL.getDisplayName() + "Egg");
         meta.setLocalizedName(PL.getName());
@@ -74,7 +74,7 @@ public class main extends JavaPlugin implements Listener {
         Location qloc = blockz.getLocation();
         for (int i = 0; i < BlockLoc.size(); i++)
         {
-            if(qloc.equals(BlockLoc.get(i)) && blockz.getType() == Material.OAK_WOOD)
+            if(qloc.equals(BlockLoc.get(i)) && blockz.getType() == Material.DRAGON_EGG)
             {
 
 
@@ -105,7 +105,7 @@ public class main extends JavaPlugin implements Listener {
     }
     public void placeStuff (Block block, Player pl)
     {
-        if(block.getType() == Material.OAK_WOOD) {
+        if(block.getType() == Material.DRAGON_EGG) {
             Location Loc = block.getLocation();
             BlockLoc.add(Loc);
             Players.add(pl.getName());
@@ -160,7 +160,7 @@ public class main extends JavaPlugin implements Listener {
     {
 
             Bukkit.broadcastMessage(String.valueOf(event.blockList()));
-        
+
 
         //Bukkit.broadcastMessage("expllload");
         doBreakStuff(event.getBlock());
@@ -195,7 +195,7 @@ public class main extends JavaPlugin implements Listener {
             Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"is out of the game");
         }
 
-        if(player9.getInventory().contains(Material.OAK_WOOD))
+        if(player9.getInventory().contains(Material.DRAGON_EGG))
         {
             Bukkit.broadcastMessage(ChatColor.AQUA +"Player" +player9.getDisplayName() +"Has lost there egg");
 
@@ -209,7 +209,7 @@ public class main extends JavaPlugin implements Listener {
     public void onItemDrop(PlayerDropItemEvent e)
     {
         Player player = e.getPlayer();
-        if(e.getItemDrop().equals(Material.OAK_WOOD))
+        if(e.getItemDrop().equals(Material.DRAGON_EGG))
             player.sendMessage("Place it down dont drop");
             e.setCancelled(true);
 
@@ -224,7 +224,7 @@ public class main extends JavaPlugin implements Listener {
             if (clicked == event.getWhoClicked().getInventory()) {
 
                 ItemStack clickedOn = event.getCurrentItem();
-                if (clickedOn != null && event.getCurrentItem().getType().equals(Material.OAK_WOOD)) {
+                if (clickedOn != null && event.getCurrentItem().getType().equals(Material.DRAGON_EGG)) {
                     event.setCancelled( true );
                 }
             }
