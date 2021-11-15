@@ -217,10 +217,10 @@ public class main extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void onworlditemdrop(EntityDropItemEvent e)
+    public void onworlditemdrop(EntityDropItemEvent e2)
     {
         for (int i = 0; i < BlockLoc.size(); i++) {
-            if (e.getItemDrop().getLocation().equals(BlockLoc.get(i))) {
+            if (e2.getItemDrop().getLocation().equals(BlockLoc.get(i))) {
                 DieList.add(Players.get(i));
                 BlockLoc.remove(i);
                 Players.remove(i);
@@ -229,8 +229,8 @@ public class main extends JavaPlugin implements Listener {
             }
         }
         //Bukkit.broadcastMessage("BLock drop" + e.getItemDrop().getName());
-        if(e.getItemDrop().getName().equals("Dragon Egg")) {
-            e.setCancelled(true);
+        if(e2.getItemDrop().getName().equals("Dragon Egg")) {
+            e2.setCancelled(true);
         }
 
     }
